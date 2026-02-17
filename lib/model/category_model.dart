@@ -23,7 +23,7 @@ class CategoryModel {
         title: "Science", id: "science",
         imagePath: "assets/images/science.png"),
     CategoryModel(
-        title: "Entertainment", id: "entertainment",
+        title: "Entertainmt", id: "entertainment",
         imagePath: "assets/images/entertainment.png")
   ];
 }

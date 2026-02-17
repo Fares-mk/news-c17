@@ -4,12 +4,14 @@ import 'package:news_c17/core/resources/colors_manager.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
+    scaffoldBackgroundColor: ColorsManager.lightPrimaryColor,
     appBarTheme: AppBarTheme(
+      scrolledUnderElevation: 0,
       backgroundColor: Colors.transparent,
       centerTitle: true,
       titleTextStyle: TextStyle(
         fontSize: 20.sp,
-        color: ColorsManager.lightPrimaryColor,
+        color: ColorsManager.lightSecondaryColor,
         fontWeight: FontWeight.w500
       ),
     ),
@@ -25,7 +27,7 @@ class AppTheme {
     ),
     textTheme: TextTheme(
       headlineMedium: TextStyle(
-        color: ColorsManager.lightPrimaryColor,
+        color: ColorsManager.lightSecondaryColor,
         fontSize: 24.sp,
         fontWeight: FontWeight.w700
       ),
@@ -33,7 +35,51 @@ class AppTheme {
         fontSize: 20.sp,
         fontWeight: FontWeight.w700,
         color: Colors.white
-      )
+      ),
+      labelSmall: TextStyle(
+        fontSize: 12.sp,
+        fontWeight: FontWeight.w500,
+        color: ColorsManager.greyColor
     )
+    )
+  );
+  static ThemeData darkTheme = ThemeData(
+    scaffoldBackgroundColor: ColorsManager.darkPrimaryColor,
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        titleTextStyle: TextStyle(
+            fontSize: 20.sp,
+            color: ColorsManager.darkSecondaryColor,
+            fontWeight: FontWeight.w500
+        ),
+      ),
+      colorScheme: ColorScheme.light(
+          primary: ColorsManager.darkPrimaryColor,
+          secondary: ColorsManager.darkSecondaryColor,
+          onSecondary: ColorsManager.greyColor,
+          onPrimaryContainer: Colors.black
+      ),
+      dividerTheme: DividerThemeData(
+        color: Colors.white,
+        thickness: 1.h,
+      ),
+      textTheme: TextTheme(
+          headlineMedium: TextStyle(
+              color: ColorsManager.darkSecondaryColor,
+              fontSize: 24.sp,
+              fontWeight: FontWeight.w700
+          ),
+          labelMedium: TextStyle(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w700,
+              color: Colors.black
+          ),
+        labelSmall: TextStyle(
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w500,
+          color: ColorsManager.greyColor
+        )
+      )
   );
 }

@@ -27,7 +27,7 @@ class CategoryItem extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24.r),
-            color: Theme.of(context).colorScheme.primary
+            color: Theme.of(context).colorScheme.secondary
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,7 +50,7 @@ class CategoryItem extends StatelessWidget {
                       start: 16
                     ),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondary.withValues(
+                      color: Theme.of(context).colorScheme.primary.withValues(
                         alpha: 0.5
                       ),
                       borderRadius: BorderRadius.circular(84.r)
@@ -62,9 +62,10 @@ class CategoryItem extends StatelessWidget {
                         ),),
                         SizedBox(width: 10,),
                         CircleAvatar(
-                          backgroundColor: Theme.of(context).colorScheme.secondary,
+                          backgroundColor: Theme.of(context).colorScheme.primary,
                           radius: 27.r,
                           child: SvgPicture.asset(AssetsManager.arrow,
+                            color:Theme.of(context).colorScheme.secondary ,
                             matchTextDirection: true,
                             height: 24.h,width: 24.w,),
                         )

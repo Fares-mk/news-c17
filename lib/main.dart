@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news_c17/core/provider/theme_provider.dart';
 import 'package:news_c17/core/remote/api/api_manager.dart';
+import 'package:news_c17/core/remote/local/memory_manager.dart';
 import 'package:news_c17/core/resources/app_theme.dart';
 import 'package:news_c17/core/resources/routes_manager.dart';
 import 'package:news_c17/ui/home/screen/home_screen.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MemoryManager.init();
   ApiManager.init();
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (BuildContext context) => ThemeProvider()..initTheme(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,6 +26,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    ThemeProvider provider = Provider.of<ThemeProvider>(context);
+
     return ScreenUtilInit(
       designSize: Size(393, 852),
       minTextAdapt: true,
@@ -23,10 +35,10 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           title: 'News App',
-          routes:{
-            RoutesManager.home:(_)=>HomeScreen()
-          },
+          routes: {RoutesManager.home: (_) => HomeScreen()},
           theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: provider.mode,
           initialRoute: RoutesManager.home,
           debugShowCheckedModeBanner: false,
         );
@@ -34,4 +46,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
