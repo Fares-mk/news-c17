@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news_c17/core/remote/api/api_manager.dart';
 import 'package:news_c17/core/resources/strings_manager.dart';
+import 'package:news_c17/model/article_response/Article.dart';
 import 'package:news_c17/model/category_model.dart';
 import 'package:news_c17/ui/articles/screen/articles_screen.dart';
+import 'package:news_c17/ui/articles/widget/articles_list.dart';
 import 'package:news_c17/ui/categories/screen/categories_screen.dart';
 import 'package:news_c17/ui/home/widgets/home_drawer.dart';
+import 'package:news_c17/ui/home/widgets/search_text_field.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -14,17 +19,42 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   CategoryModel? selectedCategory;
-
+  bool isSearching=false;
+  late TextEditingController searchController;
+  List<Article> filteredList=[];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    searchController=TextEditingController();
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    searchController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(selectedCategory!=null?selectedCategory!.title:StringsManager.home),
+        toolbarHeight: 78.h,
+        title: isSearching?SearchTextField(onClick: searchAppear,searchController: searchController,onChanged: (value) => setState(() {
+          searchController.text=value;
+        }),):Text(selectedCategory!=null?selectedCategory!.title:StringsManager.home),
+        actions: [
+         if(!isSearching)
+          IconButton(onPressed:(){
+            setState(() {
+              isSearching=!isSearching;
+            });
+          }, icon: Icon(Icons.search))
+        ],
       ),
-      drawer: HomeDrawer(goToHome),
-      body: selectedCategory!=null
+      drawer: isSearching?null:HomeDrawer(goToHome),
+      body: searchController.text.isNotEmpty?ArticlesList(filteredList: filteredList,):(selectedCategory!=null
           ?ArticlesScreen(selectedCategory!)
-          :CategoriesScreen(onCategoryClick),
+          :CategoriesScreen(onCategoryClick))
     );
   }
 
@@ -41,5 +71,22 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
 
     });
+  }
+  searchAppear(){
+     setState(() {
+       isSearching=!isSearching;
+       searchController.text="";
+       filteredList.clear();
+     });
+  }
+  search()async{
+    var response=await ApiManager.getArticles(null,searchController.text);
+    filteredList=[];
+    List<Article> articles=response?.articles??[];
+    for(int i=0;i<articles.length;i++){
+      if(articles[i].title!.contains(searchController.text)){
+        filteredList.add(articles[i]);
+      }
+    }
   }
 }

@@ -5,4 +5,5 @@ abstract final class StringsManager {
 Here is Some News For You''';
   static const String home = "Home";
   static const String viewAll = "View All";
+  static const String ViewFullArticel = "View Full Articel";
 }

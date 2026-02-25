@@ -22,12 +22,15 @@ class ApiManager {
      SourceResponse sourceResponse =SourceResponse.fromJson(response.data);
      return sourceResponse;
     }
-    static Future<ArticleResponse?> getArticles(String sourceId)async{
+    static Future<ArticleResponse?> getArticles(String? sourceId ,String? query)async{
     var response=await dio.get("/v2/everything",queryParameters: {
       "apiKey":AppConstants.apiKey,
-      "sources":sourceId,
+      if(sourceId!=null)"sources":sourceId,
+      if(query!=null)"q":query
+
     });
     var artileResponse= ArticleResponse.fromJson(response.data);
     return artileResponse;
     }
+
 }

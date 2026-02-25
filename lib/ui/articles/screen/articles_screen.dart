@@ -28,10 +28,10 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
       future: ApiManager.getSources(widget.category.id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
-          Text("There is an error");
+           print(snapshot.error);
         }
         SourceResponse? response = snapshot.data;
         List<Source> sources = response?.sources ?? [];
@@ -53,11 +53,12 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
               ),
               Expanded(
                 child: TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
                   children: sources
                       .map(
                         (source) => Padding(
                           padding: REdgeInsets.all(16),
-                          child: ArticlesList(articleId: source.id ?? ""),
+                          child: ArticlesList(articleId: source.id ?? "",),
                         ),
                       )
                       .toList(),

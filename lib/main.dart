@@ -7,8 +7,11 @@ import 'package:news_c17/core/resources/app_theme.dart';
 import 'package:news_c17/core/resources/routes_manager.dart';
 import 'package:news_c17/ui/home/screen/home_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
+import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 void main() async {
+  WebViewPlatform.instance = AndroidWebViewPlatform();
   WidgetsFlutterBinding.ensureInitialized();
   await MemoryManager.init();
   ApiManager.init();

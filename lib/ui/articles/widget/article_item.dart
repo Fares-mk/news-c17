@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news_c17/ui/articles/widget/bottom_sheet_screen.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:news_c17/model/article_response/Article.dart';
 
@@ -12,11 +13,16 @@ class ArticleItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      // onTap: () {
-      //   showModalBottomSheet(context: context, builder: (context) {
-      //     return Text("data");
-      //   },);
-      // },
+      onTap: () {
+        showModalBottomSheet(context: context, builder: (context) {
+          return Container(
+              padding: REdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: BottomSheetScreen(article: article,));
+        },isScrollControlled: true,backgroundColor: Colors.transparent);
+      },
       child: Container(
         padding: REdgeInsets.all(8.r),
         decoration: BoxDecoration(

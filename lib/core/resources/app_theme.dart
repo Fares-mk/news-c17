@@ -54,7 +54,7 @@ class AppTheme {
             fontWeight: FontWeight.w500
         ),
       ),
-      colorScheme: ColorScheme.light(
+      colorScheme: ColorScheme.dark(
           primary: ColorsManager.darkPrimaryColor,
           secondary: ColorsManager.darkSecondaryColor,
           onSecondary: ColorsManager.greyColor,
