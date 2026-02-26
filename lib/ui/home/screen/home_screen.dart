@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_c17/core/remote/api/api_manager.dart';
@@ -40,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         toolbarHeight: 78.h,
         title: isSearching?SearchTextField(onClick: searchAppear,searchController: searchController,onChanged: (value) => setState(() {
-          search();
+          Timer(Duration(milliseconds: 500), () => search(),);
         }),):Text(selectedCategory!=null?selectedCategory!.title:StringsManager.home),
         actions: [
          if(!isSearching)
