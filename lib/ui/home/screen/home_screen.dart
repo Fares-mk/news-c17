@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         toolbarHeight: 78.h,
         title: isSearching?SearchTextField(onClick: searchAppear,searchController: searchController,onChanged: (value) => setState(() {
-          searchController.text=value;
+          search();
         }),):Text(selectedCategory!=null?selectedCategory!.title:StringsManager.home),
         actions: [
          if(!isSearching)
@@ -79,14 +79,12 @@ class _HomeScreenState extends State<HomeScreen> {
        filteredList.clear();
      });
   }
-  search()async{
-    var response=await ApiManager.getArticles(null,searchController.text);
+   Future<void> search()async{
     filteredList=[];
-    List<Article> articles=response?.articles??[];
-    for(int i=0;i<articles.length;i++){
-      if(articles[i].title!.contains(searchController.text)){
-        filteredList.add(articles[i]);
-      }
-    }
+    var response=await ApiManager.getSearch(searchController.text);
+    filteredList=response!.articles!;
+    setState(() {
+
+    });
   }
 }

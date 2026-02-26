@@ -13,13 +13,13 @@ class ArticlesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: ApiManager.getArticles(articleId,null),
+      future: ApiManager.getArticles(articleId),
       builder: (context, snapshot) {
         if(snapshot.connectionState== ConnectionState.waiting){
-           return Center(child: CircularProgressIndicator(),);
+            Center(child: CircularProgressIndicator(),);
         }
         if(snapshot.hasError){
-           return Text("There is an error");
+            Text("There is an error");
         }
         var response=snapshot.data;
         List<Article> source=response?.articles??[];
