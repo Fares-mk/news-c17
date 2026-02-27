@@ -34,7 +34,8 @@ class ApiManager {
   static Future<ArticleResponse?> getSearch(String query)async{
     var response=await dio.get("/v2/everything",queryParameters: {
       "apiKey":AppConstants.apiKey,
-      "q":query
+      "q":query,
+      "pageSize":5,
 
     });
     var artileResponse= ArticleResponse.fromJson(response.data);
