@@ -41,7 +41,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
                 });
               },
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding:  REdgeInsets.all(16.0),
                 child: SvgPicture.asset(
                   AssetsManager.close,
                   colorFilter:ColorFilter.mode(Theme.of(context).colorScheme.secondary, BlendMode.srcIn) ,

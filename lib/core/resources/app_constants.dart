@@ -1,5 +1,5 @@
 abstract final class AppConstants {
-  static const String apiKey = "8221db01d09b4d10ae1b7a135cb8d4c8";
+  static const String apiKey = "2b622101c651401887948ce2d9ceb6e5";
   static const String baseUrl = "https://newsapi.org";
   static const List<String> dummySources =  [
     "CBC",
