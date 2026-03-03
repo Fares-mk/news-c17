@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_c17/ui/articles/widget/bottom_sheet_screen.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:news_c17/model/article_response/Article.dart';
+
+import '../../../data/model/article_response/Article.dart';
 
 class ArticleItem extends StatelessWidget {
   const ArticleItem({super.key, required this.article});

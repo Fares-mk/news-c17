@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news_c17/core/DI/di.dart';
 import 'package:news_c17/core/remote/api/api_manager.dart';
 import 'package:news_c17/core/resources/assets_manager.dart';
-import 'package:news_c17/model/article_response/Article.dart';
-import 'package:news_c17/model/category_model.dart';
+
 import 'package:news_c17/ui/articles/widget/article_item.dart';
 import 'package:news_c17/ui/articles/widget/article_screen_viewmodel.dart';
 import 'package:news_c17/ui/articles/widget/article_states.dart';
 import 'package:provider/provider.dart';
+
+import '../../../data/model/article_response/Article.dart';
 
 class ArticlesList extends StatelessWidget {
   String articleId;
@@ -19,7 +21,7 @@ class ArticlesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ArticleScreenViewmodel()..getArticles(articleId),
+      create: (context) => getIt<ArticleScreenViewmodel>()..getArticles(articleId),
       child: BlocBuilder<ArticleScreenViewmodel,ArticleStates>(builder: (context, state) {
         switch(state){
 
@@ -39,7 +41,7 @@ class ArticlesList extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          ApiManager.getArticles(articleId);
+                          // ApiManager.getArticles(articleId);
                         },
                         child: Text(
                           "Try again",

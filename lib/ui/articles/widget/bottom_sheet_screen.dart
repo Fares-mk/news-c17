@@ -2,8 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_c17/core/resources/strings_manager.dart';
-import 'package:news_c17/model/article_response/Article.dart';
 import 'package:news_c17/ui/articles/widget/web_view_screen.dart';
+
+import '../../../data/model/article_response/Article.dart';
 
 class BottomSheetScreen extends StatelessWidget {
   Article article;

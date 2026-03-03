@@ -1,17 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_c17/core/remote/api/api_manager.dart';
-import 'package:news_c17/model/article_response/Article.dart';
-import 'package:news_c17/model/source_response/Source.dart';
+import 'package:injectable/injectable.dart';
+import 'package:news_c17/repository/articles_repo.dart';
+
 import 'package:news_c17/ui/articles/widget/article_states.dart';
-
+@injectable
 class ArticleScreenViewmodel extends Cubit<ArticleStates> {
-  ArticleScreenViewmodel():super(LoadingState());
-
+  ArticleScreenViewmodel(this.articlesRepo):super(LoadingState());
+   ArticlesRepo articlesRepo;
   getArticles(categoryId)async{
     try{
       emit(LoadingState());
-      var response=await ApiManager.getArticles(categoryId);
+      var response=await articlesRepo.fetchArticles(categoryId);
       if(response?.status!='error'){
         emit(SuccessState(response?.articles??[]));
       }

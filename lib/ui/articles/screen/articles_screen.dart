@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_c17/core/remote/api/api_manager.dart';
-import 'package:news_c17/core/resources/app_constants.dart';
-import 'package:news_c17/core/resources/colors_manager.dart';
-import 'package:news_c17/model/article_response/Article.dart';
-import 'package:news_c17/model/article_response/Article_response.dart';
-import 'package:news_c17/model/source_response/Source.dart';
-import 'package:news_c17/model/source_response/Source_response.dart';
-import 'package:news_c17/model/category_model.dart';
+import 'package:news_c17/core/DI/di.dart';
+
 import 'package:news_c17/ui/articles/screen/source_screen_viewmodel.dart';
 import 'package:news_c17/ui/articles/screen/surces_states.dart';
 import 'package:news_c17/ui/articles/widget/articles_list.dart';
-import 'package:provider/provider.dart';
+
+import '../../../data/model/category_model.dart';
 
 class ArticlesScreen extends StatefulWidget {
   CategoryModel category;
@@ -29,7 +24,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          SourceScreenViewmodel()..getSources(widget.category.id),
+          getIt<SourceScreenViewmodel>()..getSources(widget.category.id),
       child: BlocBuilder<SourceScreenViewmodel, SurcesStates>(
         builder: (context, state) {
           switch (state) {
@@ -49,7 +44,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        ApiManager.getSources(widget.category.id);
+                        // ApiManager.getSources(widget.category.id);
                       },
                       child: Text(
                         "Try again",

@@ -1,4 +1,5 @@
-import 'package:news_c17/model/source_response/Source.dart';
+import '../source_response/Source.dart';
+
 class Article {
   Article({
       this.source, 

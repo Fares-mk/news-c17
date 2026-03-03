@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_c17/core/resources/strings_manager.dart';
-import 'package:news_c17/model/category_model.dart';
 import 'package:news_c17/ui/categories/widgets/category_item.dart';
+
+import '../../../data/model/category_model.dart';
 
 class CategoriesScreen extends StatelessWidget {
   void Function(CategoryModel) selectCategory;

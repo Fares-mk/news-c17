@@ -1,15 +1,19 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_c17/core/remote/api/api_manager.dart';
-import 'package:news_c17/model/source_response/Source.dart';
+import 'package:injectable/injectable.dart';
+
+import 'package:news_c17/repository/source_repo.dart';
 import 'package:news_c17/ui/articles/screen/surces_states.dart';
+@injectable
 class SourceScreenViewmodel extends Cubit<SurcesStates>{
-  SourceScreenViewmodel():super(LoadingState());
+
+  SourceScreenViewmodel(this.sourceRepo):super(LoadingState());
+   SourceRepo sourceRepo;
+
 
   getSources(String categoryId)async{
     try{
       emit(LoadingState());
-      var response=await ApiManager.getSources(categoryId);
+      var response=await sourceRepo.fetchSource(categoryId);
       if(response?.status!='error'){
         emit(SuccessState(response?.sources??[]));
       }

@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:news_c17/core/resources/app_constants.dart';
-import 'package:news_c17/model/article_response/Article.dart';
-import 'package:news_c17/model/article_response/Article_response.dart';
-import 'package:news_c17/model/source_response/Source_response.dart';
 
+import '../../../data/model/article_response/Article_response.dart';
+import '../../../data/model/source_response/Source_response.dart';
+
+@lazySingleton
 class ApiManager {
   static late Dio dio;
   static init(){
@@ -14,7 +16,7 @@ class ApiManager {
     );
   }
   //
-  static  Future<SourceResponse?> getSources(String category)async{
+    Future<SourceResponse?> getSources(String category)async{
       var response = await dio.get("/v2/top-headlines/sources",queryParameters: {
       "apiKey":AppConstants.apiKey,
       "category": category
@@ -22,7 +24,7 @@ class ApiManager {
      SourceResponse sourceResponse =SourceResponse.fromJson(response.data);
      return sourceResponse;
     }
-    static Future<ArticleResponse?> getArticles(String sourceId ,)async{
+     Future<ArticleResponse?> getArticles(String sourceId ,)async{
     var response=await dio.get("/v2/everything",queryParameters: {
       "apiKey":AppConstants.apiKey,
       "sources":sourceId,

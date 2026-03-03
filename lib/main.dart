@@ -10,11 +10,14 @@ import 'package:provider/provider.dart';
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 
+import 'core/DI/di.dart';
+
 void main() async {
   WebViewPlatform.instance = AndroidWebViewPlatform();
   WidgetsFlutterBinding.ensureInitialized();
   await MemoryManager.init();
   ApiManager.init();
+  configureDependencies();
   runApp(
     ChangeNotifierProvider(
       create: (BuildContext context) => ThemeProvider()..initTheme(),

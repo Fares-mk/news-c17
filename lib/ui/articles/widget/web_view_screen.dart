@@ -4,7 +4,8 @@ import 'package:news_c17/ui/home/screen/home_screen.dart';
 import 'package:news_c17/ui/home/widgets/home_drawer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../../model/category_model.dart';
+import '../../../data/model/category_model.dart';
+
 
 class WebViewScreen extends StatefulWidget {
   final String url;
